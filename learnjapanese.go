@@ -16,12 +16,17 @@ var DIGRAPH bool = true
 func main() {
 
 	args := os.Args[1:]
-	if len(args) == 1 {
-		DIGRAPH = false
+	var jpmap map[string]string
+	if len(args) == 0 {
+		jpmap = nihon.AllHiragana()
+	} else if args[0] == "hiragana" {
+		jpmap = nihon.RomajiToJapaneseMap
+	} else if args[0] == "katakana" {
+		jpmap = nihon.KatakanaToJapaneseMap
 	}
 
 	var arr []string
-	for k, _ := range nihon.RomajiToJapaneseMap {
+	for k, _ := range jpmap {
 		if DIGRAPH || (!DIGRAPH && len(k) == 3) {
 			arr = append(arr, k)
 		}
