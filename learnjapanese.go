@@ -12,11 +12,11 @@ import (
 )
 
 var DIGRAPH bool = true
+var jpmap map[string]string
 
 func main() {
 
 	args := os.Args[1:]
-	var jpmap map[string]string
 	if len(args) == 0 {
 		jpmap = nihon.AllHiragana()
 	} else if args[0] == "hiragana" {
@@ -41,7 +41,7 @@ func main() {
 }
 
 func getVal(val string) string {
-	h, _ := nihon.RomajiToJapaneseMap[val]
+	h, _ := jpmap[val]
 	return h
 }
 
